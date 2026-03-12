@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cristina & Pau · 26 septiembre 2026</title>
-<meta property="og:title" content="Cristina & Pau · 26 septiembre 2026" />
-<meta property="og:description" content="¡Nos casamos! Guardad la fecha 💍" />
-<meta property="og:image" content="https://cemaspe.github.io/Recordatorio-boda/anillo.jpeg" />
-<meta property="og:url" content="https://cemaspe.github.io/Recordatorio-boda/" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -820,7 +814,7 @@
     <span class="section-label">Regalo de boda</span>
     <div class="iban-box">
       <div class="iban-title">✦ CUENTA BANCARIA ✦</div>
-      <div class="iban-num" id="iban-num" onclick="copyIBAN()">ES12 3456 7890 1234 5678 9012</div>
+      <div class="iban-num" id="iban-num">ES12 3456 7890 1234 5678 9012</div>
       <div class="iban-hint">TOCA PARA COPIAR</div>
       <div class="iban-copied" id="iban-copied">✓ COPIADO</div>
       <p class="iban-note">Si deseas hacernos un regalo, puedes enviarlo aquí.<br>Indica en el concepto Nombre y Apellidos para que podamos agradecértelo</p>
@@ -848,14 +842,45 @@
 </div>
 
 <script>
+/* ── IBAN copy con guardia anti-scroll ── */
+const IBAN_REAL = 'ES12 3456 7890 1234 5678 9012';
+
+(function () {
+  let touchStartX = 0, touchStartY = 0;
+
+  function wasTap(e) {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    return Math.sqrt(dx * dx + dy * dy) < 8;
+  }
+
+  const ibanEl = document.getElementById('iban-num');
+
+  ibanEl.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  ibanEl.addEventListener('touchend', e => {
+    if (wasTap(e)) { e.preventDefault(); copyIBAN(); }
+  });
+
+  ibanEl.addEventListener('click', () => { copyIBAN(); });
+})();
+
 function copyIBAN() {
-  const IBAN = 'ES12 3456 7890 1234 5678 9012';
-  const copied = document.getElementById('iban-copied');
-  navigator.clipboard?.writeText(IBAN).then(() => {
-    copied.classList.add('show');
-    setTimeout(() => copied.classList.remove('show'), 2200);
+  const numEl = document.getElementById('iban-num');
+  const orig  = numEl.textContent;
+
+  navigator.clipboard.writeText(IBAN_REAL).then(() => {
+    numEl.textContent = '✓ Copiado';
+    numEl.style.color = 'var(--gold)';
+    setTimeout(() => {
+      numEl.textContent = orig;
+      numEl.style.color = '';
+    }, 2200);
   }).catch(() => {
-    prompt('Copia el IBAN:', IBAN);
+    prompt('Copia el IBAN:', IBAN_REAL);
   });
 }
 
