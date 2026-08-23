@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Safari en iOS lee los grupos de digitos del IBAN como un telefono y los
+     convierte en un enlace azul subrayado. Aqui se le dice que no. -->
+<meta name="format-detection" content="telephone=no, email=no, address=no">
 <title>Cristina & Pau · 26 septiembre 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=Cormorant+Garamond:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -669,6 +672,16 @@
   }
 
   .iban-num:hover { color: var(--gold-light) !important; }
+
+  /* Cinturon por si el detector se cuela igual: el ancla que inyecta iOS
+     se queda del color del IBAN, sin subrayado, y sin recibir el toque,
+     que tiene que llegar al div para que copie. */
+  .iban-num a,
+  .iban-num a[x-apple-data-detectors] {
+    color: inherit !important;
+    text-decoration: none !important;
+    pointer-events: none !important;
+  }
 
   .iban-hint {
     font-family: 'Cinzel', serif;
