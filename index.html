@@ -230,6 +230,12 @@
     display: block;
   }
 
+  /* Etiqueta larga: menos interletraje para que quepa en una linea
+     hasta en pantallas de 320px */
+  .section-label.long {
+    letter-spacing: 2.4px;
+  }
+
   .big-date {
     font-family: 'Cinzel', serif;
     font-size: clamp(15px, 4vw, 20px);
@@ -451,15 +457,6 @@
     text-transform: uppercase;
     color: var(--gold-light);
     margin-bottom: 6px;
-  }
-
-  .bus-intro {
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-dim);
-    line-height: 1.5;
-    margin-bottom: 26px;
   }
 
   .bus-leg { margin-top: 22px; }
@@ -941,8 +938,7 @@
 
   <!-- AUTOBÚS -->
   <section class="bus-wrap">
-    <span class="section-label">Cómo llegar en autobús</span>
-    <p class="bus-intro">Hemos contratado dos autocares para que nadie tenga que conducir. Uno sale de València y el otro de L’Eliana. Sube en la parada que te pille mejor y vuelve con nosotros al final de la fiesta.</p>
+    <span class="section-label long">¿Utilizarás autobús? ¡Esto te interesa!</span>
 
     <div class="bus-card">
       <div class="bus-card-title">Autobús València</div>
