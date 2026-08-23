@@ -431,6 +431,131 @@
   }
   .map-link:hover { color: var(--gold-light); border-color: var(--gold); }
 
+
+  /* ── AUTOBÚS ────────────────────────────────── */
+  .bus-wrap {
+    padding: 44px 0 40px;
+    border-bottom: 1px solid var(--gold-line);
+    animation: fadeUp .8s .7s both;
+  }
+
+  .bus-intro {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 26px;
+  }
+
+  .bus-leg + .bus-leg { margin-top: 34px; }
+
+  .bus-leg-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .bus-leg-icon {
+    font-size: 13px;
+    line-height: 1;
+    color: var(--gold);
+    opacity: .8;
+  }
+
+  .bus-stops {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px;
+    position: relative;
+  }
+
+  .bus-stops::before {
+    content: '';
+    position: absolute;
+    left: 71px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-line) 10%, var(--gold-line) 90%, transparent);
+  }
+
+  .bus-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 13px 0;
+    position: relative;
+  }
+
+  .bus-time {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    width: 52px;
+    flex-shrink: 0;
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  .bus-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px rgba(201,168,76,.5);
+    flex-shrink: 0;
+    margin: 4px 16px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bus-name {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  .bus-addr {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    line-height: 1.45;
+  }
+
+  .bus-map {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,.3);
+    padding-bottom: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  .bus-map:hover { color: var(--gold-light); border-color: var(--gold); }
+
+  .bus-note {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 22px;
+    padding-left: 68px;
+  }
+
   /* ── FOOTER ────────────────────────────────────────── */
   .footer {
     text-align: center;
@@ -586,6 +711,8 @@
   @media (max-width: 400px) {
     .cd-item { padding: 0 12px; }
     .sch-time { font-size: 11px; }
+    .bus-time { font-size: 11px; }
+    .bus-name { font-size: 11px; }
     .sch-name { font-size: 11px; }
   }
 
@@ -809,6 +936,70 @@
     </a>
   </section>
 
+  <!-- AUTOBÚS -->
+  <section class="bus-wrap">
+    <span class="section-label">Cómo llegar en autobús</span>
+    <p class="bus-intro">Hemos contratado un autocar para que nadie tenga que conducir. Sube en la parada que te pille mejor y vuelve con nosotros al final de la fiesta.</p>
+
+    <!-- ↓↓ RELLENAR: paradas, horas y enlaces reales ↓↓ -->
+    <div class="bus-leg">
+      <div class="bus-leg-title"><span class="bus-leg-icon">→</span> Ida · hacia La Barraca</div>
+      <div class="bus-stops">
+        <div class="bus-item">
+          <span class="bus-time">10:45</span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">PARADA 1</div>
+            <div class="bus-addr">Dirección de la parada</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time">11:00</span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">PARADA 2</div>
+            <div class="bus-addr">Dirección de la parada</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time">11:40</span>
+          <div class="bus-dot" style="background:rgba(201,168,76,.4);box-shadow:none;"></div>
+          <div class="bus-content">
+            <div class="bus-name">LA BARRACA DEL PALMAR</div>
+            <div class="bus-addr">Llegada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bus-leg">
+      <div class="bus-leg-title"><span class="bus-leg-icon">←</span> Vuelta · desde La Barraca</div>
+      <div class="bus-stops">
+        <div class="bus-item">
+          <span class="bus-time">21:15</span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">SALIDA DE LA BARRACA</div>
+            <div class="bus-addr">Mismo punto donde te deja por la mañana</div>
+          </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time">22:00</span>
+          <div class="bus-dot" style="background:rgba(201,168,76,.4);box-shadow:none;"></div>
+          <div class="bus-content">
+            <div class="bus-name">REGRESO A LAS PARADAS</div>
+            <div class="bus-addr">En orden inverso al de la ida</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ↑↑ RELLENAR ↑↑ -->
+
+    <p class="bus-note">* El autocar sale puntual. Mejor estar cinco minutos antes.</p>
+  </section>
+
   <!-- IBAN -->
   <section class="iban-wrap">
     <span class="section-label">Regalo de boda</span>
@@ -971,6 +1162,7 @@ function añadirCalendario() {
   <div class="nav-dot" data-target="fecha"><span class="nav-tooltip">El día</span></div>
   <div class="nav-dot" data-target="programa"><span class="nav-tooltip">Programa</span></div>
   <div class="nav-dot" data-target="ubicacion"><span class="nav-tooltip">Ubicación</span></div>
+  <div class="nav-dot" data-target="autobus"><span class="nav-tooltip">Autobús</span></div>
   <div class="nav-dot" data-target="regalo"><span class="nav-tooltip">Regalo</span></div>
   <div class="nav-dot" data-target="agenda"><span class="nav-tooltip">Agenda</span></div>
 </nav>
@@ -984,6 +1176,7 @@ function añadirCalendario() {
     'fecha':     document.querySelector('.key-date'),
     'programa':  document.querySelector('.schedule-wrap'),
     'ubicacion': document.querySelector('.location-wrap'),
+    'autobus':   document.querySelector('.bus-wrap'),
     'regalo':    document.querySelector('.iban-wrap'),
     'agenda':    document.querySelector('.cal-wrap'),
   };
