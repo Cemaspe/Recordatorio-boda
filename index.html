@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cristina & Pau · 26 septiembre 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=Cormorant+Garamond:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold:       #C9A84C;
@@ -613,24 +613,22 @@
     margin-top: 20px;
   }
 
-  .iban-title {
-    font-family: 'Cinzel', serif;
-    font-size: 8px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    opacity: .8;
-    margin-bottom: 12px;
+  .iban-orn {
+    line-height: 0;
+    margin-bottom: -2px;
   }
 
   .iban-num {
-    font-family: 'EB Garamond', serif;
-    font-size: 22px;
-    color: rgba(255,255,255,.85) !important;
-    letter-spacing: 2px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(13.6px, 4.2vw, 19px);
+    color: rgba(255,255,255,.98) !important;
+    letter-spacing: clamp(.64px, .4vw, 2px);
+    white-space: nowrap;
     cursor: pointer;
     transition: color .2s;
     display: inline-block;
     padding: 4px 0;
+    touch-action: manipulation;
     -webkit-text-decoration: none !important;
     text-decoration: none !important;
   }
@@ -641,30 +639,18 @@
     font-family: 'Cinzel', serif;
     font-size: 7px;
     letter-spacing: 2px;
-    color: rgba(255,255,255,.3);
-    margin-top: 6px;
+    color: rgba(255,255,255,.7);
+    margin-top: 4px;
   }
 
   .iban-note {
-    font-family: 'EB Garamond', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 15px;
-    color: rgba(255,255,255,.42);
-    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,.8);
+    margin-top: 10px;
     line-height: 1.7;
   }
-
-  .iban-copied {
-    font-family: 'Cinzel', serif;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    margin-top: 8px;
-    opacity: 0;
-    transition: opacity .3s;
-  }
-
-  .iban-copied.show { opacity: 1; }
 
   /* ── CALENDAR BUTTON ───────────────────────────────── */
   .cal-wrap {
@@ -1004,11 +990,20 @@
   <section class="iban-wrap">
     <span class="section-label">Regalo de boda</span>
     <div class="iban-box">
-      <div class="iban-title">✦ CUENTA BANCARIA ✦</div>
-      <div class="iban-num" id="iban-num">ES12 3456 7890 1234 5678 9012</div>
+      <div class="iban-orn">
+        <svg width="140" height="56" viewBox="0 0 140 56" fill="none" aria-hidden="true">
+          <path d="M10 28 h20 M110 28 h20" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
+          <circle cx="6" cy="28" r="1.5" fill="#D4A853"/>
+          <circle cx="134" cy="28" r="1.5" fill="#D4A853"/>
+          <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+          <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+          <path d="M80 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
+          <path d="M80 6 l4 5 l-4 6" fill="rgba(255,255,255,.35)"/>
+        </svg>
+      </div>
+      <div class="iban-num" id="iban-num">ES11 1583 0001 1191 1447 7085</div>
       <div class="iban-hint">TOCA PARA COPIAR</div>
-      <div class="iban-copied" id="iban-copied">✓ COPIADO</div>
-      <p class="iban-note">Si deseas hacernos un regalo, puedes enviarlo aquí.<br>Indica en el concepto Nombre y Apellidos para que podamos agradecértelo</p>
+      <p class="iban-note">¡Gracias!</p>
     </div>
   </section>
 
@@ -1034,7 +1029,7 @@
 
 <script>
 /* ── IBAN copy con guardia anti-scroll ── */
-const IBAN_REAL = 'ES12 3456 7890 1234 5678 9012';
+const IBAN_REAL = 'ES11 1583 0001 1191 1447 7085';
 
 (function () {
   let touchStartX = 0, touchStartY = 0;
