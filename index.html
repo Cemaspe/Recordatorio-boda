@@ -265,7 +265,6 @@
   .schedule-wrap {
     padding: 44px 0 40px;
     border-bottom: 1px solid var(--gold-line);
-    animation: fadeUp .8s .6s both;
     position: relative;
     overflow: hidden;
   }
@@ -363,7 +362,6 @@
   .location-wrap {
     padding: 44px 0 40px;
     border-bottom: 1px solid var(--gold-line);
-    animation: fadeUp .8s .7s both;
   }
 
   .venue-name {
@@ -441,7 +439,6 @@
   .bus-wrap {
     padding: 44px 0 40px;
     border-bottom: 1px solid var(--gold-line);
-    animation: fadeUp .8s .7s both;
   }
 
   .bus-card + .bus-card {
@@ -570,7 +567,6 @@
   .footer {
     text-align: center;
     padding: 44px 0 0;
-    animation: fadeUp .8s .8s both;
   }
 
   .footer-orn {
@@ -596,6 +592,29 @@
   }
 
   /* ── ANIMATIONS ────────────────────────────────────── */
+  /* ── APARICION AL BAJAR ─────────────────────────────
+     La clase .reveal la pone el script, nunca el HTML: si el JS no
+     llega a ejecutarse la pagina se ve entera, no en blanco. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .75s ease, transform .75s cubic-bezier(.22,.61,.36,1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -612,7 +631,6 @@
   .iban-wrap {
     padding: 44px 0 40px;
     border-bottom: 1px solid var(--gold-line);
-    animation: fadeUp .8s .72s both;
   }
 
   .iban-box {
@@ -667,7 +685,6 @@
     padding: 44px 0 40px;
     border-bottom: 1px solid var(--gold-line);
     text-align: center;
-    animation: fadeUp .8s .75s both;
   }
 
   .btn-cal {
@@ -1229,6 +1246,54 @@ function añadirCalendario() {
 
   tick();
   setInterval(tick, 1000);
+})();
+</script>
+
+<script>
+/* ── Aparicion progresiva al bajar ──────────────────────
+   Las piezas de debajo del pliegue entran cuando les toca, no todas de
+   golpe al cargar. El escalonado se calcula por tanda: las que cruzan
+   el borde en el mismo fotograma salen una detras de otra. */
+(function () {
+  const SELECTORES = [
+    '.schedule-wrap > .section-label',
+    '.sch-item',
+    '.schedule-wrap > p',
+    '.location-wrap > .section-label',
+    '.venue-name', '.venue-addr', '.map-box', '.parking',
+    '.bus-wrap > .section-label',
+    '.bus-card-title', '.bus-leg-title', '.bus-item', '.bus-note',
+    '.iban-wrap > .section-label', '.iban-box',
+    '.cal-wrap > .section-label', '.btn-cal',
+    '.footer-orn', '.footer-msg'
+  ];
+
+  const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!('IntersectionObserver' in window) || sinMovimiento) return;
+
+  const piezas = [];
+  SELECTORES.forEach(sel => document.querySelectorAll(sel).forEach(el => piezas.push(el)));
+
+  // Si algo peta entre esconder y observar, la pagina se queda en blanco
+  // de la mitad para abajo. Antes de dejar eso, se destapa todo.
+  try {
+    piezas.forEach(el => el.classList.add('reveal'));
+
+    const obs = new IntersectionObserver((entradas) => {
+      entradas
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        .forEach((e, i) => {
+          e.target.style.transitionDelay = Math.min(i, 5) * 70 + 'ms';
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
+
+    piezas.forEach(el => obs.observe(el));
+  } catch (e) {
+    piezas.forEach(el => el.classList.remove('reveal'));
+  }
 })();
 </script>
 
