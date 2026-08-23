@@ -102,12 +102,19 @@
     animation: fadeUp .8s .2s both;
   }
 
-  .names em {
-    font-style: italic;
-    font-family: 'EB Garamond', serif;
-    font-size: .75em;
-    color: rgba(201,168,76,.55);
-    margin: 0 10px;
+  /* Los anillos del IBAN, espejados: la piedra en el de la izquierda */
+  .names-orn {
+    display: inline-block;
+    line-height: 0;
+    margin: 0 12px;
+    /* Apoyados en la linea de base, como una mayuscula mas */
+    vertical-align: baseline;
+  }
+
+  .names-orn svg {
+    display: block;
+    height: .82em;
+    width: auto;
   }
 
   .tagline {
@@ -830,7 +837,14 @@
   <header class="hdr">
     <p class="hdr-label">Os esperamos</p>
     <span class="orn">✦ · · · · · ✦</span>
-    <div class="names">Cristina <em>&amp;</em> Pau</div>
+    <div class="names">Cristina<span class="names-orn">
+      <svg viewBox="40 4 58 41" fill="none" aria-hidden="true">
+        <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+        <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+        <path d="M58 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
+        <path d="M58 6 l-4 5 l4 6" fill="rgba(255,255,255,.35)"/>
+      </svg>
+    </span>Pau</div>
     <p class="tagline">En uno de los días más felices de nuestras vidas.</p>
   </header>
 
