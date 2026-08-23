@@ -391,44 +391,44 @@
     filter: grayscale(1) sepia(.4) brightness(.75) contrast(1.1);
   }
 
-  .parking-note {
-    margin-top: 16px;
+  .parking {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    background: var(--gold-pale);
-    border: 1px solid var(--gold-line);
-    border-radius: 4px;
-    padding: 14px 16px;
+    align-items: center;
+    gap: 15px;
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gold-line);
   }
 
   .parking-icon {
-    font-size: 18px;
     flex-shrink: 0;
-    margin-top: 1px;
+    line-height: 0;
+    color: var(--gold);
+  }
+
+  .parking-icon svg {
+    display: block;
+    width: 34px;
+    height: 34px;
+  }
+
+  .parking-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: .85;
+    margin-bottom: 5px;
   }
 
   .parking-text {
     font-family: 'EB Garamond', serif;
+    font-style: italic;
     font-size: 15px;
     color: var(--text-dim);
-    font-style: italic;
+    line-height: 1.5;
   }
-
-  .map-link {
-    display: inline-block;
-    margin-top: 14px;
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-decoration: none;
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(201,168,76,.3);
-    padding-bottom: 2px;
-    transition: border-color .2s, color .2s;
-  }
-  .map-link:hover { color: var(--gold-light); border-color: var(--gold); }
 
 
   /* ── AUTOBÚS ────────────────────────────────── */
@@ -936,16 +936,20 @@
       </iframe>
     </div>
 
-    <div class="parking-note">
-      <span class="parking-icon">🅿</span>
-      <span class="parking-text">Hay aparcamiento gratuito justo en la entrada de La Barraca.</span>
+    <div class="parking">
+      <span class="parking-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10.6" stroke="currentColor" stroke-width="1" opacity="0.55"/>
+          <path d="M9.1 17.6 V6.4 h3.1 a2.8 2.8 0 0 1 0 5.6 H9.1"
+                stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div>
+        <div class="parking-label">Aparcamiento</div>
+        <p class="parking-text">Gratuito, justo en la entrada de La Barraca.</p>
+      </div>
     </div>
-
-    <a class="map-link"
-       href="https://www.google.com/maps/place/La+Barraca+del+Palmar+by+Grupo+El+Alto/@39.3151674,-0.3217562,17z/data=!3m1!4b1!4m6!3m5!1s0xd61b58b3d1a4001:0xeff8f1d74ac00167!8m2!3d39.3151633!4d-0.3191813!16s%2Fg%2F11q8y51bvy"
-       target="_blank">
-      ↗ Abrir en Google Maps
-    </a>
   </section>
 
   <!-- AUTOBÚS -->
