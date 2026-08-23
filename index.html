@@ -439,6 +439,34 @@
     animation: fadeUp .8s .7s both;
   }
 
+  .bus-card + .bus-card {
+    margin-top: 30px;
+    padding-top: 28px;
+    border-top: 1px solid var(--gold-line);
+  }
+
+  .bus-card-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .bus-card-num {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-line);
+    padding: 4px 7px 3px;
+    flex-shrink: 0;
+  }
+
   .bus-intro {
     font-family: 'EB Garamond', serif;
     font-style: italic;
@@ -448,7 +476,7 @@
     margin-bottom: 26px;
   }
 
-  .bus-leg + .bus-leg { margin-top: 34px; }
+  .bus-leg { margin-top: 22px; }
 
   .bus-leg-title {
     display: flex;
@@ -925,65 +953,134 @@
   <!-- AUTOBÚS -->
   <section class="bus-wrap">
     <span class="section-label">Cómo llegar en autobús</span>
-    <p class="bus-intro">Hemos contratado un autocar para que nadie tenga que conducir. Sube en la parada que te pille mejor y vuelve con nosotros al final de la fiesta.</p>
+    <p class="bus-intro">Hemos contratado dos autocares para que nadie tenga que conducir. Uno sale de València y el otro de L’Eliana. Sube en la parada que te pille mejor y vuelve con nosotros al final de la fiesta.</p>
 
-    <!-- ↓↓ RELLENAR: paradas, horas y enlaces reales ↓↓ -->
-    <div class="bus-leg">
-      <div class="bus-leg-title"><span class="bus-leg-icon">→</span> Ida · hacia La Barraca</div>
-      <div class="bus-stops">
-        <div class="bus-item">
-          <span class="bus-time">10:45</span>
-          <div class="bus-dot"></div>
-          <div class="bus-content">
-            <div class="bus-name">PARADA 1</div>
-            <div class="bus-addr">Dirección de la parada</div>
-            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
-          </div>
-        </div>
+    <div class="bus-card">
+      <div class="bus-card-title"><span class="bus-card-num">Bus 1</span> València</div>
+      <div class="bus-leg">
+        <div class="bus-leg-title"><span class="bus-leg-icon">→</span> Ida</div>
+        <div class="bus-stops">
         <div class="bus-item">
           <span class="bus-time">11:00</span>
           <div class="bus-dot"></div>
           <div class="bus-content">
-            <div class="bus-name">PARADA 2</div>
-            <div class="bus-addr">Dirección de la parada</div>
-            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+            <div class="bus-name">GRAN VIA FERRAN EL CATÒLIC</div>
+            <div class="bus-addr">Gran Via de Ferran el Catòlic, 43 · 46008 València</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Gran%20Via%20de%20Ferran%20el%20Catolic%2043%2C%2046008%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
           </div>
         </div>
         <div class="bus-item">
-          <span class="bus-time">11:40</span>
-          <div class="bus-dot" style="background:rgba(201,168,76,.4);box-shadow:none;"></div>
+          <span class="bus-time">11:10</span>
+          <div class="bus-dot"></div>
           <div class="bus-content">
-            <div class="bus-name">LA BARRACA DEL PALMAR</div>
-            <div class="bus-addr">Llegada</div>
+            <div class="bus-name">PERIS I VALERO</div>
+            <div class="bus-addr">Av. de Peris i Valero, 31 · en la rotonda de la Peugeot</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Avinguda%20de%20Peris%20i%20Valero%2031%2C%2046006%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
           </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time">11:20</span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">SANT MARCEL·LÍ</div>
+            <div class="bus-addr">Parada de taxis de la rotonda de entrada al barrio · Av. Doctor Tomás Sala con C/ Sant Marcel·lí</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Avinguda%20Doctor%20Tomas%20Sala%20amb%20Carrer%20de%20Sant%20Marceli%2C%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
         </div>
       </div>
-    </div>
-
-    <div class="bus-leg">
-      <div class="bus-leg-title"><span class="bus-leg-icon">←</span> Vuelta · desde La Barraca</div>
-      <div class="bus-stops">
+      <div class="bus-leg">
+        <div class="bus-leg-title"><span class="bus-leg-icon">←</span> Regreso</div>
+        <div class="bus-stops">
         <div class="bus-item">
-          <span class="bus-time">21:15</span>
+          <span class="bus-time">22:15</span>
           <div class="bus-dot"></div>
           <div class="bus-content">
             <div class="bus-name">SALIDA DE LA BARRACA</div>
-            <div class="bus-addr">Mismo punto donde te deja por la mañana</div>
+            <div class="bus-addr">Rumbo a València</div>
           </div>
         </div>
         <div class="bus-item">
-          <span class="bus-time">22:00</span>
-          <div class="bus-dot" style="background:rgba(201,168,76,.4);box-shadow:none;"></div>
+          <span class="bus-time"></span>
+          <div class="bus-dot"></div>
           <div class="bus-content">
-            <div class="bus-name">REGRESO A LAS PARADAS</div>
-            <div class="bus-addr">En orden inverso al de la ida</div>
+            <div class="bus-name">SANT MARCEL·LÍ</div>
+            <div class="bus-addr">Rotonda de entrada al barrio · Av. Doctor Tomás Sala con C/ Sant Marcel·lí</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Avinguda%20Doctor%20Tomas%20Sala%20amb%20Carrer%20de%20Sant%20Marceli%2C%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
           </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time"></span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">PERIS I VALERO</div>
+            <div class="bus-addr">Av. de Peris i Valero, 31 · rotonda de la Peugeot</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Avinguda%20de%20Peris%20i%20Valero%2031%2C%2046006%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time"></span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">GRAN VIA FERRAN EL CATÒLIC</div>
+            <div class="bus-addr">Gran Via de Ferran el Catòlic, 43</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Gran%20Via%20de%20Ferran%20el%20Catolic%2043%2C%2046008%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
         </div>
       </div>
     </div>
-    <!-- ↑↑ RELLENAR ↑↑ -->
 
-    <p class="bus-note">* El autocar sale puntual. Mejor estar cinco minutos antes.</p>
+    <div class="bus-card">
+      <div class="bus-card-title"><span class="bus-card-num">Bus 2</span> L’Eliana</div>
+      <div class="bus-leg">
+        <div class="bus-leg-title"><span class="bus-leg-icon">→</span> Ida</div>
+        <div class="bus-stops">
+        <div class="bus-item">
+          <span class="bus-time">11:10</span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">MARQUESOS DEL TREMOLAR</div>
+            <div class="bus-addr">C/ dels Marquesos del Tremolar, 19 · 46183 L’Eliana</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20dels%20Marquesos%20del%20Tremolar%2019%2C%2046183%20L%27Eliana%2C%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="bus-leg">
+        <div class="bus-leg-title"><span class="bus-leg-icon">←</span> Regreso</div>
+        <div class="bus-stops">
+        <div class="bus-item">
+          <span class="bus-time">22:15</span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">SALIDA DE LA BARRACA</div>
+            <div class="bus-addr">Rumbo a L’Eliana</div>
+          </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time"></span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">HOTEL IRIS</div>
+            <div class="bus-addr">C/ Doctor Sanchis Bergón, 16</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Doctor%20Sanchis%20Bergon%2016%2C%2046183%20L%27Eliana%2C%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
+        <div class="bus-item">
+          <span class="bus-time"></span>
+          <div class="bus-dot"></div>
+          <div class="bus-content">
+            <div class="bus-name">MARQUESOS DEL TREMOLAR</div>
+            <div class="bus-addr">C/ dels Marquesos del Tremolar, 19</div>
+            <a class="bus-map" href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20dels%20Marquesos%20del%20Tremolar%2019%2C%2046183%20L%27Eliana%2C%20Valencia" target="_blank" rel="noopener">↗ Ver en el mapa</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bus-note">* Los autocares salen puntuales. Mejor estar cinco minutos antes.</p>
   </section>
 
   <!-- IBAN -->
