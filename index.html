@@ -315,7 +315,8 @@
   .schedule::before {
     content: '';
     position: absolute;
-    left: 56px;
+    /* Centrado en los puntos, igual que el de las paradas del autobus */
+    left: 71px;
     top: 0;
     bottom: 0;
     width: 1px;
@@ -360,14 +361,6 @@
     letter-spacing: 2px;
     color: var(--text);
   }
-  .sch-desc {
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
   /* ── LOCATION ──────────────────────────────────────── */
   .location-wrap {
     padding: 44px 0 40px;
@@ -902,7 +895,6 @@
         <div class="sch-dot"></div>
         <div class="sch-content">
           <div class="sch-name">Llegada de invitados</div>
-          <div class="sch-desc">Recepción en La Barraca del Palmar</div>
         </div>
       </div>
       <div class="sch-item">
@@ -910,7 +902,6 @@
         <div class="sch-dot"></div>
         <div class="sch-content">
           <div class="sch-name">Ceremonia</div>
-          <div class="sch-desc">El momento que lo cambia todo</div>
         </div>
       </div>
       <div class="sch-item">
@@ -918,7 +909,6 @@
         <div class="sch-dot"></div>
         <div class="sch-content">
           <div class="sch-name">Cóctel</div>
-          <div class="sch-desc">Aperitivos y brindis</div>
         </div>
       </div>
       <div class="sch-item">
@@ -926,7 +916,6 @@
         <div class="sch-dot"></div>
         <div class="sch-content">
           <div class="sch-name">Banquete</div>
-          <div class="sch-desc">Menú de celebración</div>
         </div>
       </div>
       <div class="sch-item">
@@ -934,7 +923,6 @@
         <div class="sch-dot"></div>
         <div class="sch-content">
           <div class="sch-name">Baile y fiesta</div>
-          <div class="sch-desc">Hasta que el cuerpo aguante</div>
         </div>
       </div>
       <div class="sch-item">
@@ -942,11 +930,9 @@
         <div class="sch-dot" style="background:rgba(201,168,76,.4);box-shadow:none;"></div>
         <div class="sch-content">
           <div class="sch-name">Fin del evento</div>
-          <div class="sch-desc">Gracias infinitas por acompañarnos el día de hoy</div>
         </div>
       </div>
     </div>
-    <p style="font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:var(--text-dim);margin-top:18px;padding-left:89px;">* Horarios orientativos</p>
   </section>
 
   <!-- UBICACIÓN -->
@@ -1285,7 +1271,6 @@ function añadirCalendario() {
   const SELECTORES = [
     '.schedule-wrap > .section-label',
     '.sch-item',
-    '.schedule-wrap > p',
     '.location-wrap > .section-label',
     '.venue-name', '.venue-addr', '.map-box', '.parking',
     '.bus-wrap > .section-label',
