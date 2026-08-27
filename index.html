@@ -29,7 +29,13 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* El recuadro gris que pinta el movil al tocar un enlace. Se quita
+       aqui porque la propiedad se hereda, y a cambio cada cosa pulsable
+       tiene su propio :active mas abajo. */
+    -webkit-tap-highlight-color: transparent;
+  }
 
   body {
     background: var(--bg);
@@ -552,7 +558,8 @@
     padding-bottom: 2px;
     transition: border-color .2s, color .2s;
   }
-  .bus-map:hover { color: var(--gold-light); border-color: var(--gold); }
+  .bus-map:hover,
+  .bus-map:active { color: var(--gold-light); border-color: var(--gold); }
 
   .bus-note {
     font-family: 'EB Garamond', serif;
@@ -661,7 +668,8 @@
     text-decoration: none !important;
   }
 
-  .iban-num:hover { color: var(--gold-light) !important; }
+  .iban-num:hover,
+  .iban-num:active { color: var(--gold-light) !important; }
 
   /* Cinturon por si el detector se cuela igual: el ancla que inyecta iOS
      se queda del color del IBAN, sin subrayado, y sin recibir el toque,
