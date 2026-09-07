@@ -659,8 +659,11 @@
   .cd-num { animation: pulse-gold 3s ease-in-out infinite; }
 
   /* ── IBAN ───────────────────────────────────────────── */
+  /* Menos aire que el resto de secciones: aqui el recuadro ya trae su
+     propio borde y su relleno, asi que el de la seccion se sumaba al
+     suyo y dejaba un hueco de 86px arriba y 85 abajo. */
   .iban-wrap {
-    padding: 44px 0 40px;
+    padding: 14px 0 10px;
     border-bottom: 1px solid var(--gold-line);
   }
 
@@ -669,7 +672,6 @@
     background: rgba(201,168,76,.03);
     padding: 24px;
     text-align: center;
-    margin-top: 20px;
   }
 
   .iban-orn {
