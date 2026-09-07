@@ -713,6 +713,34 @@
     margin-top: 4px;
   }
 
+  .iban-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-top: 20px;
+  }
+
+  /* Los titulares SI pueden partirse en dos lineas, al reves que el IBAN:
+     un numero de cuenta cortado por la mitad no se lee, un nombre si. */
+  .iban-titulares {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(13px, 3.6vw, 16px);
+    color: rgba(255,255,255,.98);
+    letter-spacing: .5px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: color .2s;
+    display: inline-block;
+    padding: 4px 0;
+    margin-top: 4px;
+    touch-action: manipulation;
+  }
+
+  .iban-titulares:hover,
+  .iban-titulares:active { color: var(--gold-light); }
+
   .iban-note {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -914,6 +942,31 @@
     <div class="big-time">12:00h</div>
   </section>
 </div><!-- /hero-wrap -->
+
+  <!-- IBAN -->
+  <section class="iban-wrap">
+    <div class="iban-box">
+      <div class="iban-orn">
+        <svg width="140" height="56" viewBox="0 0 140 56" fill="none" aria-hidden="true">
+          <path d="M10 28 h20 M110 28 h20" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
+          <circle cx="6" cy="28" r="1.5" fill="#D4A853"/>
+          <circle cx="134" cy="28" r="1.5" fill="#D4A853"/>
+          <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+          <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+          <path d="M80 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
+          <path d="M80 6 l4 5 l-4 6" fill="rgba(255,255,255,.35)"/>
+        </svg>
+      </div>
+      <div class="iban-num" id="iban-num">ES11 1583 0001 1191 1447 7085</div>
+      <div class="iban-hint">TOCA PARA COPIAR</div>
+
+      <div class="iban-label">A nombre de</div>
+      <div class="iban-titulares" id="iban-titulares">C Zapata de Miguel &amp; P Sánchez Paños</div>
+      <div class="iban-hint">TOCA PARA COPIAR</div>
+
+      <p class="iban-note">¡Gracias!</p>
+    </div>
+  </section>
 
   <!-- HORARIO -->
   <section class="schedule-wrap">
@@ -1134,26 +1187,6 @@
     <p class="bus-note">* Los autobuses salen puntuales. Mejor estar diez minutos antes.</p>
   </section>
 
-  <!-- IBAN -->
-  <section class="iban-wrap">
-    <div class="iban-box">
-      <div class="iban-orn">
-        <svg width="140" height="56" viewBox="0 0 140 56" fill="none" aria-hidden="true">
-          <path d="M10 28 h20 M110 28 h20" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
-          <circle cx="6" cy="28" r="1.5" fill="#D4A853"/>
-          <circle cx="134" cy="28" r="1.5" fill="#D4A853"/>
-          <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
-          <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
-          <path d="M80 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
-          <path d="M80 6 l4 5 l-4 6" fill="rgba(255,255,255,.35)"/>
-        </svg>
-      </div>
-      <div class="iban-num" id="iban-num">ES11 1583 0001 1191 1447 7085</div>
-      <div class="iban-hint">TOCA PARA COPIAR</div>
-      <p class="iban-note">¡Gracias!</p>
-    </div>
-  </section>
-
   <!-- CALENDARIO -->
   <section class="cal-wrap">
     <span class="section-label">Guárdalo en tu agenda</span>
@@ -1175,8 +1208,11 @@
 </div>
 
 <script>
-/* ── IBAN copy con guardia anti-scroll ── */
-const IBAN_REAL = 'ES11 1583 0001 1191 1447 7085';
+/* ── Copiar al portapapeles, con guardia anti-scroll ──
+   Dos piezas copiables dentro del mismo recuadro: el numero de cuenta y
+   los titulares. Cada una copia SU texto, no el del recuadro entero. */
+const IBAN_REAL  = 'ES11 1583 0001 1191 1447 7085';
+const TITULARES  = 'C Zapata de Miguel & P Sánchez Paños';
 
 (function () {
   let touchStartX = 0, touchStartY = 0;
@@ -1187,33 +1223,42 @@ const IBAN_REAL = 'ES11 1583 0001 1191 1447 7085';
     return Math.sqrt(dx * dx + dy * dy) < 8;
   }
 
-  const ibanEl = document.getElementById('iban-num');
+  function enganchar(id, valor) {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-  ibanEl.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
+    el.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
 
-  ibanEl.addEventListener('touchend', e => {
-    if (wasTap(e)) { e.preventDefault(); copyIBAN(); }
-  });
+    // El touchend copia y corta el click que vendria detras. Sin la
+    // guardia, arrastrar el dedo para hacer scroll sobre el numero
+    // contaba como toque y copiaba sin querer.
+    el.addEventListener('touchend', e => {
+      if (wasTap(e)) { e.preventDefault(); copiarAlPortapapeles(id, valor); }
+    });
 
-  ibanEl.addEventListener('click', () => { copyIBAN(); });
+    el.addEventListener('click', () => { copiarAlPortapapeles(id, valor); });
+  }
+
+  enganchar('iban-num', IBAN_REAL);
+  enganchar('iban-titulares', TITULARES);
 })();
 
-function copyIBAN() {
-  const numEl = document.getElementById('iban-num');
-  const orig  = numEl.textContent;
+function copiarAlPortapapeles(id, valor) {
+  const el   = document.getElementById(id);
+  const orig = el.textContent;
 
-  navigator.clipboard.writeText(IBAN_REAL).then(() => {
-    numEl.textContent = '✓ Copiado';
-    numEl.style.color = 'var(--gold)';
+  navigator.clipboard.writeText(valor).then(() => {
+    el.textContent = '✓ Copiado';
+    el.style.color = 'var(--gold)';
     setTimeout(() => {
-      numEl.textContent = orig;
-      numEl.style.color = '';
+      el.textContent = orig;
+      el.style.color = '';
     }, 2200);
   }).catch(() => {
-    prompt('Copia el IBAN:', IBAN_REAL);
+    prompt('Copia esto:', valor);
   });
 }
 
@@ -1349,10 +1394,10 @@ function añadirCalendario() {
   <div class="nav-dot active" data-target="hdr"><span class="nav-tooltip">Inicio</span></div>
   <div class="nav-dot" data-target="countdown"><span class="nav-tooltip">Cuenta atrás</span></div>
   <div class="nav-dot" data-target="fecha"><span class="nav-tooltip">El día</span></div>
+  <div class="nav-dot" data-target="regalo"><span class="nav-tooltip">Regalo</span></div>
   <div class="nav-dot" data-target="programa"><span class="nav-tooltip">Programa</span></div>
   <div class="nav-dot" data-target="ubicacion"><span class="nav-tooltip">Ubicación</span></div>
   <div class="nav-dot" data-target="autobus"><span class="nav-tooltip">Autobús</span></div>
-  <div class="nav-dot" data-target="regalo"><span class="nav-tooltip">Regalo</span></div>
   <div class="nav-dot" data-target="agenda"><span class="nav-tooltip">Agenda</span></div>
 </nav>
 
